@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment — the real values live in `.env`, which is never committed.
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Tool caches
+.turbo/
+.vite/
+
+# Deployment
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

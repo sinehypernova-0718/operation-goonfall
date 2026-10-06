@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Install scripts pnpm is allowed to run. esbuild and Tailwind's native oxide
+# binding need theirs to link the correct platform binary; everything else in
+# the tree is safe to leave unbuilt.
+allowBuilds:
+  esbuild: true
+  '@tailwindcss/oxide': true

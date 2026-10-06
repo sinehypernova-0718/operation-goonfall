@@ -1,0 +1,15 @@
+/*
+ * Tailwind CSS v4 entrypoint.
+ *
+ * v4 is configured in CSS rather than JavaScript: `@import "tailwindcss"`
+ * replaces the old `@tailwind base/components/utilities` directives and the
+ * `tailwind.config.js` file. Add `@theme` tokens and `@source` paths here when
+ * the actual UI needs them.
+ */
+@import "tailwindcss";
+
+html,
+body,
+#app {
+  height: 100%;
+}

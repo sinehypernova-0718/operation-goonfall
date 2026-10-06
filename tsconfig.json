@@ -1,0 +1,31 @@
+{
+  // Shared strict TypeScript base for the whole workspace.
+  // `apps/*` and `packages/*` extend this file and narrow `lib`/`types` to
+  // whatever their runtime actually provides.
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Nothing is compiled ahead of time: Vite bundles the web app, tsx runs the
+    // API, and Vercel builds the deployment artifact.
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "files": []
+}

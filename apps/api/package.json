@@ -1,0 +1,26 @@
+{
+  "name": "@goonfall/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../../.env src/server.ts",
+    "dev:vercel": "vercel dev"
+  },
+  "dependencies": {
+    "@goonfall/config": "workspace:*",
+    "@goonfall/contracts": "workspace:*",
+    "@goonfall/db": "workspace:*",
+    "@hono/node-server": "^2.1.3",
+    "better-auth": "^1.7.7",
+    "drizzle-orm": "^0.45.3",
+    "hono": "^4.13.13",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vercel": "^62.4.0"
+  }
+}
