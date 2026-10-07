@@ -52,11 +52,6 @@ api.route("/api", routes);
 
 app.route("/", api);
 
-// Local development mounts the app at the root, where no "/api" prefix exists.
-// Redirecting the legacy un-prefixed health path keeps existing local checks
-// working without registering the routes twice.
-app.use("/health", (c) => c.redirect("/api/health", 307));
-
 app.onError(errorHandler);
 app.notFound(notFoundHandler);
 

@@ -17,7 +17,7 @@ export class ApiError extends Error {
   readonly code: ApiErrorCode;
   readonly status: ContentfulStatusCode;
   /** Server-side diagnostic only — never serialized to the client. */
-  readonly cause: unknown;
+  override readonly cause: unknown;
 
   constructor(
     code: ApiErrorCode,

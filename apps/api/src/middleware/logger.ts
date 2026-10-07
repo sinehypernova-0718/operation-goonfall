@@ -19,6 +19,10 @@ export type LogFields = {
   durationMs?: number;
   /** Server-side diagnostic only — never serialized into a client response. */
   error?: unknown;
+  /** Free-text log line (startup/boot messages). */
+  message?: string;
+  /** Which environment this process is running as (boot logs only). */
+  appEnv?: string;
 };
 
 export function log(level: LogLevel, fields: LogFields): void {

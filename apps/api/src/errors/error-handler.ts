@@ -50,6 +50,6 @@ export const errorHandler: ErrorHandler = (err, c) => {
   return response;
 };
 
-export const notFoundHandler: NotFoundHandler = (c) => {
+export const notFoundHandler: NotFoundHandler = () => {
   throw ApiError.notFound();
 };

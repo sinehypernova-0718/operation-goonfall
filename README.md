@@ -1,10 +1,6 @@
---- README.md (原始)
-
-
-+++ README.md (修改后)
 # Operation Goonfall
 
-A private, three-player web application.
+A private, configurable multiplayer web application.
 
 > **Status: development workspace only.** The repository contains the monorepo
 > scaffold, tooling, and infrastructure wiring. The application itself — game
