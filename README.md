@@ -1,3 +1,7 @@
+--- README.md (原始)
+
+
++++ README.md (修改后)
 # Operation Goonfall
 
 A private, three-player web application.
@@ -29,10 +33,13 @@ operation-goonfall/
 │   ├── api/                    # @goonfall/api — Hono HTTP API
 │   │   ├── api/[[...route]].ts # Vercel serverless entrypoint
 │   │   └── src/
-│   │       ├── app.ts          # Hono app; assembles routes
+│   │       ├── app.ts          # canonical Hono composition (both runtimes)
+│   │       ├── server.ts       # local dev server (@hono/node-server)
 │   │       ├── auth/index.ts   # Better Auth instance
 │   │       ├── config/env.ts   # API's single env entry point
-│   │       └── server.ts       # local dev server (@hono/node-server)
+│   │       ├── errors/         # ApiError + centralized error handling
+│   │       ├── middleware/     # request ID, structured logging, CORS
+│   │       └── routes/         # /api/health, /api/v1/*, /api/auth/*
 │   └── web/                    # @goonfall/web — Vue 3 SPA
 │       ├── src/
 │       │   ├── main.ts
