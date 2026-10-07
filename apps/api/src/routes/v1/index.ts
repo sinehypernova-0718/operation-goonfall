@@ -6,11 +6,14 @@
  * routes on `v1` (or sub-routers mounted beneath it) without touching the rest
  * of the application.
  *
- * Phase 1 deliberately ships no domain routes here. The boundary exists so
- * versioning is a routing decision, not a refactor.
+ * Phase 2 adds the identity endpoint `GET /api/v1/me`, which establishes the
+ * public/authenticated boundary via `requireAuth`. No domain routes exist yet
+ * by design; authorization beyond "has a session" belongs to later phases.
  */
 import { Hono } from "hono";
 
+import { meRoute } from "./me.js";
+
 export const v1 = new Hono();
 
-// No endpoints yet by design — see Phase 1 scope restrictions.
+v1.route("/me", meRoute);
