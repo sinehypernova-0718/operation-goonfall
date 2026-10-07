@@ -13,6 +13,7 @@
  */
 import { authenticatedUserSchema, type AuthenticatedUser } from "@goonfall/contracts";
 import { Hono } from "hono";
+import { ApiError } from "../../errors/api-error";
 
 import { requireAuth, type AuthContext } from "../../middleware/require-auth.js";
 
@@ -21,12 +22,16 @@ export const meRoute = new Hono<{ Variables: AuthContext }>();
 meRoute.get("/", requireAuth, (c) => {
   const user = c.get("user");
 
+  if (!user.username) {
+    throw ApiError.internal();
+  }
+
   const body: AuthenticatedUser = authenticatedUserSchema.parse({
     id: user.id,
     name: user.name,
     // `username` is nullable at the DB-schema level (plugin-added column) but
     // is guaranteed present for every account created through this API.
-    username: user.username ?? (() => { throw new Error("Internal invariant violation: user missing username"); })(),
+    username: user.username,
   });
 
   return c.json(body);
