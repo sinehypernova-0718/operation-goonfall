@@ -2,6 +2,7 @@ import { serve } from "@hono/node-server";
 
 // Imported first so the environment is validated before anything else loads.
 import { env } from "./config/env.js";
+import { log } from "./middleware/logger.js";
 import { app } from "./app.js";
 
 /**
@@ -14,5 +15,8 @@ import { app } from "./app.js";
 const port = Number(process.env.PORT ?? 3001);
 
 serve({ fetch: app.fetch, port }, (info) => {
-  console.log(`API listening on http://localhost:${info.port} (${env.APP_ENV})`);
+  log("info", {
+    message: `API listening on http://localhost:${info.port}`,
+    appEnv: env.APP_ENV,
+  });
 });

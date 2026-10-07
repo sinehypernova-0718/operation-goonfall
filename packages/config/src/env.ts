@@ -13,6 +13,17 @@ export const appEnvs = ["development", "production"] as const;
 
 export type AppEnv = (typeof appEnvs)[number];
 
+/**
+ * Parse `CORS_ORIGIN` — a comma-separated list of explicit origins — into a
+ * deduplicated array. Empty entries are dropped, so trailing commas and
+ * accidental whitespace between values are tolerated.
+ */
+const corsOrigins = z
+  .string()
+  .transform((value) => [
+    ...new Set(value.split(",").map((origin) => origin.trim()).filter(Boolean)),
+  ]);
+
 export const serverEnvSchema = z.object({
   APP_ENV: z.enum(appEnvs).default("development"),
 
@@ -29,6 +40,14 @@ export const serverEnvSchema = z.object({
 
   /** Public origin of the API, as the browser reaches it. */
   BETTER_AUTH_URL: z.url({ error: "BETTER_AUTH_URL must be a full URL" }),
+
+  /**
+   * Explicit CORS allowlist — comma-separated origins (no wildcards). Cross-
+   * origin requests from any other origin are rejected by the API's CORS
+   * middleware. Empty means no cross-origin caller is allowed; same-origin
+   * requests always work.
+   */
+  CORS_ORIGIN: corsOrigins.default([]),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
