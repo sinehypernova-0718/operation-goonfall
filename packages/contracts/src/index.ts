@@ -45,3 +45,18 @@ export const apiErrorBodySchema = z.object({
 });
 
 export type ApiErrorBody = z.infer<typeof apiErrorBodySchema>;
+
+/**
+ * Safe public identity returned by authenticated endpoints
+ * (`GET /api/v1/me`). Deliberately minimal: only what identifies the current
+ * user to the client. Never add email (an internal placeholder — see
+ * `apps/api/src/auth/index.ts`), credentials, session tokens or any
+ * authentication metadata to this shape.
+ */
+export const authenticatedUserSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  username: z.string().min(1),
+});
+
+export type AuthenticatedUser = z.infer<typeof authenticatedUserSchema>;

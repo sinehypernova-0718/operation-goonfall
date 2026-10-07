@@ -6,9 +6,13 @@
  * outside the allowlist simply receives no `Access-Control-Allow-Origin`
  * header, so the browser blocks it.
  *
- * Credentials are disabled: Phase 1 exposes no authenticated API behavior that
- * would require them. If a later phase needs cookie-authenticated cross-origin
- * calls, this is the single place to revisit.
+ * Credentials are enabled because Phase 2's sessions are cookie-based: a
+ * browser may only send the Better Auth session cookie cross-origin when the
+ * response carries `Access-Control-Allow-Credentials: true`. That is safe here
+ * precisely because the origin resolver above echoes back only origins from
+ * the explicit `CORS_ORIGIN` list and never a wildcard — credentialed CORS
+ * with `*` is invalid and is never emitted. Unlisted origins receive no
+ * allow headers at all, in development and production alike.
  */
 import { cors } from "hono/cors";
 
@@ -19,5 +23,5 @@ export const corsMiddleware = cors({
   allowHeaders: ["Content-Type", "X-Request-ID"],
   exposeHeaders: ["X-Request-ID"],
   maxAge: 600,
-  credentials: false,
+  credentials: true,
 });
